@@ -18,11 +18,11 @@ class Search extends Component {
 
   getBooks = (event) => {
 
-    const query = event.target.value.trim()
+    const query = event.target.value
     this.setState({ query: query })
 
     // User input than run search feature
-    if (query) {
+    if (query.trim()) {
       BooksAPI.search(query, 20).then((books) => {
         books.length > 0 ?  this.setState({newBooks: books, searchErr: false }) : this.setState({ newBooks: [], searchErr: true })
       })
@@ -54,7 +54,7 @@ class Search extends Component {
                   <h3>Search returned { newBooks.length } books </h3>
                 </div>
                 <ol className="books-grid">
-                  {newBooks.map((book) => (
+                  {query && newBooks.map((book) => (
                     <Book
                       book={ book }
                       books={ books }

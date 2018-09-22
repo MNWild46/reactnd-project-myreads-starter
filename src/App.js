@@ -28,7 +28,10 @@ class BooksApp extends React.Component {
 
       // add book to array and set new state
       updatedBooks.push(newBook);
-      this.setState({ books: updatedBooks })
+      this.setState((prevState) => ({
+        // treat prevState exactly as if it's this.state
+        books:  prevState.books.filter(book => book.id !== newBook.id);
+}));
     })
   }
 
